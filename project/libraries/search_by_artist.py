@@ -8,8 +8,9 @@ def search_by_artist(selected_artist: str):
     ticket_collection = collection_connection('Compravendita-Concerti', 'Biglietto')
     tickets = join_concert_tickets(ticket_collection)
 
-    selected_tickets = [ticket for ticket in tickets if selected_artist in
-                        ticket['id_concerto'][0]['artista_principale']]
+    selected_tickets = [ticket for ticket in tickets if
+                        ticket['id_concerto'][0]['artista_principale'].lower().startswith(selected_artist) or
+                        ticket['id_concerto'][0]['artista_principale'].lower().endswith(selected_artist)]
 
     if selected_tickets:
         display_concerts(selected_tickets)
