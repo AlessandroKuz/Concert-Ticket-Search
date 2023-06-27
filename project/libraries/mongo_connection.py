@@ -4,7 +4,7 @@ from pymongo import MongoClient
 
 def client_connection():
     try:
-        with open('../resources/connection_string.txt', 'r') as mongo_conn_string:
+        with open('resources/connection_string.txt', 'r') as mongo_conn_string:
             connection_string = mongo_conn_string.read().strip()
             client = MongoClient(connection_string)
             client.admin.command("ping")

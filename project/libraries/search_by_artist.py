@@ -7,7 +7,12 @@ from project.libraries.buy_tickets import buy_tickets
 def search_by_artist(selected_artist: str):
     ticket_collection = collection_connection('Compravendita-Concerti', 'Biglietto')
     tickets = join_concert_tickets(ticket_collection)
-    selected_tickets = [ticket for ticket in tickets if ticket['id_concerto'][0]['artista_principale'] == selected_artist]
 
-    display_concerts(selected_tickets)
-    buy_tickets(ticket_collection, selected_tickets)
+    selected_tickets = [ticket for ticket in tickets if selected_artist in
+                        ticket['id_concerto'][0]['artista_principale']]
+
+    if selected_tickets:
+        display_concerts(selected_tickets)
+        buy_tickets(ticket_collection, selected_tickets)
+    else:
+        print(f"No concerts found for artist '{selected_artist}'")
