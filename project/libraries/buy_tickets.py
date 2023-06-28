@@ -39,7 +39,7 @@ def print_ticket_details(num_tickets, concert_name, available_tickets):
 
     for ticket in range(num_tickets):
         ticket_code = str(available_tickets - ticket).zfill(6)
-        print(f'Your ticket code is {ticket_code}')
+        print(f'Your ticket code is N.{ticket_code}')
 
     print('Ticket purchased successfully!')
 
