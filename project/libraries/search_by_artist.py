@@ -9,11 +9,11 @@ def search_by_artist(selected_artist: str):
     tickets = join_concert_tickets(ticket_collection)
 
     selected_tickets = [ticket for ticket in tickets if
-                        ticket['id_concerto'][0]['artista_principale'].lower().startswith(selected_artist) or
-                        ticket['id_concerto'][0]['artista_principale'].lower().endswith(selected_artist)]
+                        ticket['concerto']['artista_principale'].lower().startswith(selected_artist) or
+                        ticket['concerto']['artista_principale'].lower().endswith(selected_artist)]
 
     if selected_tickets:
         display_concerts(selected_tickets)
         buy_tickets(ticket_collection, selected_tickets)
     else:
-        print(f"No concerts found for artist '{selected_artist}'")
+        print(f"\nNo concerts found for artist '{selected_artist}'")

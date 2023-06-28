@@ -8,8 +8,11 @@ def join_concert_tickets(ticket_collection: pymongo.collection.Collection):
                 'from': 'Concerto',
                 'localField': 'id_concerto',
                 'foreignField': '_id',
-                'as': 'id_concerto'
+                'as': 'concerto'
             }
+        },
+        {
+            '$unwind': '$concerto'
         }
     ]
 

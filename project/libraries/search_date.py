@@ -5,11 +5,35 @@ from project.libraries.buy_tickets import buy_tickets
 import datetime
 
 
-def search_by_date(start_date: datetime.datetime, end_date: datetime.datetime):
+def search_by_date():
     ticket_collection = collection_connection('Compravendita-Concerti', 'Biglietto')
     tickets = join_concert_tickets(ticket_collection)
 
-    selected_tickets = [ticket for ticket in tickets if start_date <= ticket['id_concerto'][0]['data_ora'] <= end_date]
+    start_date, end_date = get_dates()
+    selected_tickets = [ticket for ticket in tickets if start_date <= ticket['concerto']['data_ora'] <= end_date]
 
-    display_concerts(selected_tickets)
-    buy_tickets(ticket_collection, selected_tickets)
+    if selected_tickets:
+        display_concerts(selected_tickets)
+        buy_tickets(ticket_collection, selected_tickets)
+    else:
+        print(f"\nNo concerts found between '{start_date.date()}' and '{end_date.date()}'")
+
+
+def get_dates():
+    while True:
+        start_date = input('\nEnter start date (dd/mm/yyyy): ')
+        start_date = datetime.datetime.strptime(start_date, '%d/%m/%Y')
+        if start_date >= datetime.datetime.now():
+            break
+        else:
+            print('\nError: start date must be in the future!')
+
+    while True:
+        end_date = input('Enter end date (dd/mm/yyyy): ')
+        end_date = datetime.datetime.strptime(end_date, '%d/%m/%Y')
+        if start_date < end_date:
+            break
+        else:
+            print('\nError: end date must be after start date!')
+
+    return start_date, end_date

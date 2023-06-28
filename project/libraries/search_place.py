@@ -13,7 +13,10 @@ def search_by_place():
     tickets = join_concert_tickets(ticket_collection)
 
     selected_tickets = [ticket for ticket in tickets for concert in concerts if
-                        ticket['id_concerto'][0]['_id'] == concert['_id']]
+                        ticket['concerto']['_id'] == concert['_id']]
 
-    display_concerts(selected_tickets)
-    buy_tickets(ticket_collection, selected_tickets)
+    if selected_tickets:
+        display_concerts(selected_tickets)
+        buy_tickets(ticket_collection, selected_tickets)
+    else:
+        print(f"\nNo concerts found near you!")
