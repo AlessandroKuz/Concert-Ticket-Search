@@ -160,6 +160,3 @@ cython_debug/
 
  # Idea folder
 .idea/
-
-# Secure connection string
-connection_string.txt
