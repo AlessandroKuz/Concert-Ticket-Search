@@ -21,19 +21,25 @@ def search_by_date():
 
 def get_dates():
     while True:
-        start_date = input('\nEnter start date (dd/mm/yyyy): ')
-        start_date = datetime.datetime.strptime(start_date, '%d/%m/%Y')
-        if start_date >= datetime.datetime.now():
-            break
-        else:
-            print('\nError: start date must be in the future!')
+        try:
+            start_date = input('\nEnter start date (dd/mm/yyyy): ')
+            start_date = datetime.datetime.strptime(start_date, '%d/%m/%Y')
+            if start_date >= datetime.datetime.now():
+                break
+            else:
+                print('\nError: start date must be in the future!')
+        except ValueError:
+            print('\nError: invalid date format!')
 
     while True:
-        end_date = input('Enter end date (dd/mm/yyyy): ')
-        end_date = datetime.datetime.strptime(end_date, '%d/%m/%Y')
-        if start_date < end_date:
-            break
-        else:
-            print('\nError: end date must be after start date!')
+        try:
+            end_date = input('Enter end date (dd/mm/yyyy): ')
+            end_date = datetime.datetime.strptime(end_date, '%d/%m/%Y')
+            if start_date < end_date:
+                break
+            else:
+                print('\nError: end date must be after start date!')
+        except ValueError:
+            print('\nError: invalid date format!')
 
     return start_date, end_date
